@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  telegram_bot:
+    build: ./telegram_bot
+    container_name: telegram_bot
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_URL=http://backend:8000
+    restart: always
+    networks:
+      - bot_network
+    volumes:                              # автооновлення
+      - ./telegram_bot:/app               # автооновлення
+    command: ["watchmedo", "auto-restart", "--patterns=*.py", "--recursive", "--", "python3", "-u", "bot.py"]    # автооновлення
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - bot_network
+    volumes:                # автооновлення
+      - ./backend:/app      # автооновлення
+
+networks:
+  bot_network:
+    driver: bridge
