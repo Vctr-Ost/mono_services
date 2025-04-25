@@ -1,6 +1,7 @@
 # mono_services
 
-Structure  ./backend/.env
+
+## Structure  ./backend/.env
 
 POSTGRES_USER=
 
@@ -17,7 +18,10 @@ SCHEMA=mono_data
 STG_TABLE=stg_transactions
 
 
-Structure ./telegram_bot/.env
+
+
+
+## Structure ./telegram_bot/.env
 
 TELEGRAM_BOT_TOKEN=
 
